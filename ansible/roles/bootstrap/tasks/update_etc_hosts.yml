@@ -1,4 +1,5 @@
 ---
+
 - name: Add controller lan to hosts
   lineinfile:
     dest: /etc/hosts
@@ -12,4 +13,5 @@
     line: "{{ server_ip }} {{ ansible_controller_hostname }}"
     state: present
   notify: "Restart Network Services"
+
 ...
