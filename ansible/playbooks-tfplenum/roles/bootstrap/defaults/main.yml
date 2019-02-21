@@ -1,0 +1,14 @@
+---
+
+tfplenum_repos:
+  - tfplenum
+  - tfplenum-frontend
+  - tfplenum-integration-testing
+
+package_list:
+  - git
+  - python-netaddr
+  - tcpreplay
+  - tcpdump
+  - rsync
+  - policycoreutils-python
