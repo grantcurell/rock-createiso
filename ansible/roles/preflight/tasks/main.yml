@@ -1,12 +1,12 @@
 ---
 - name: Check if tfplenum vars exists
   stat:
-    path: "{{ tfplenum_vars }}"
+    path: "{{ group_vars_location }}"
   register: vars_result
 
 - name: Missing tfplenum repo
   fail:
-    msg: "Unable to find versions.yml in {{ tfplenum_vars }}.  Verify tfplenum rpm is installed."
+    msg: "Unable to find versions.yml in {{ group_vars_location }}.  Verify tfplenum rpm is installed."
   when: vars_result.stat.exists == false
 
 - name: check if Centos iso exists

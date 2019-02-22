@@ -10,7 +10,7 @@
 
 - name: Import tfplenum variables
   include_vars:
-    file: "{{ tfplenum_vars }}"
+    file: "{{ group_vars_location }}"
 
 - import_tasks: 00_httpd.yml
 - import_tasks: 02_isos.yml

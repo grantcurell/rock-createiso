@@ -8,9 +8,9 @@
     GIT_PASSWORD: "{{ lookup('env','GIT_PASSWORD') }}"    
 
 - import_tasks: rhel_repos.yml
-  when: TFPLENUM_OS_TYPE == "rhel"
+  when: OS_TYPE == "rhel"
 - import_tasks: centos_repos.yml
-  when: TFPLENUM_OS_TYPE == "centos"
+  when: OS_TYPE == "centos"
 - import_tasks: additional_repos.yml
 
 - name: "Install required packages"
@@ -30,3 +30,5 @@
 - import_tasks: offline_repos.yml
 - import_tasks: update_etc_hosts.yml
 - import_tasks: finish.yml
+
+...

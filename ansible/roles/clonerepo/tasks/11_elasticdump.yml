@@ -8,4 +8,4 @@
   - name: Pack node modules dir
     archive:
       path: "/tmp/node_modules"
-      dest: "{{ tfplenumoffline_dir }}/elasticdump.tar.gz"
+      dest: "{{ offline_dir }}/elasticdump.tar.gz"

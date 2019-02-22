@@ -1,7 +1,7 @@
 ---
 - name: "Create directory for offline repos"
   file:
-    path: "{{ tfplenumoffline_dir }}"
+    path: "{{ offline_dir }}"
     state: directory
     mode: 0755
     owner: root
@@ -13,8 +13,8 @@
     path: "{{ item }}"
     state: directory
   with_items:
-    - "{{ TFPLENUM_REPO_DIR }}"
-    - "{{ TFPLENUM_REPO_DIR }}/Packages"
+    - "{{ REPO_DIR }}"
+    - "{{ REPO_DIR }}/Packages"
 
 - name: "Install bootstrap packages"
   yum:

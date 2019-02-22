@@ -13,9 +13,9 @@ rock_version: "3_0"
 kick_cfg: ks.cfg
 tftp_dir: /var/lib/tftpboot
 web_root: /var/www/html
-tfplenumoffline_dir: "{{ web_root }}/offlinerepo"
+offline_dir: "{{ web_root }}/offlinerepo"
 install_dir: /opt/tfplenum
-tfplenum_vars: "{{ install_dir }}/playbooks/group_vars/all/versions.yml"
+group_vars_location: "{{ install_dir }}/playbooks/group_vars/all/versions.yml"
 
 rhel_repos:
   - rhel-7-server-rpms
@@ -30,49 +30,49 @@ additional_repo_info:
     gpgkeyname: "yum-key.gpg"
     description: "kubernetes repo"
     # Required because kube public repo uses relative path so this is a hack to fix it
-    download_path: "{{ tfplenumoffline_dir }}/tmp"
+    download_path: "{{ offline_dir }}/tmp"
   ceph_base:
     name: "ceph_base"
     baseurl: "https://download.ceph.com/rpm-luminous/el7/$basearch"
     gpgkeyurl: "https://download.ceph.com/keys/release.asc"
     gpgkeyname: "release.asc"
     description: "ceph base repo"
-    download_path: "{{ tfplenumoffline_dir }}"
+    download_path: "{{ offline_dir }}"
   ceph_noarch:
     name: "ceph_noarch"
     baseurl: "https://download.ceph.com/rpm-luminous/el7/$basearch"
     gpgkeyurl: "https://download.ceph.com/keys/release.asc"
     gpgkeyname: "release.asc"
     description: "ceph base repo"
-    download_path: "{{ tfplenumoffline_dir }}"
+    download_path: "{{ offline_dir }}"
   ceph_srpms:
     name: "ceph_srpms"
     baseurl: "https://download.ceph.com/rpm-luminous/el7/SRPMS"
     gpgkeyurl: "https://download.ceph.com/keys/release.asc"
     gpgkeyname: "release.asc"
     description: "ceph srpms repo"
-    download_path: "{{ tfplenumoffline_dir }}"
+    download_path: "{{ offline_dir }}"
   mongo:
     name: "mongodb-org-4.0"
     baseurl: "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/"
     gpgkeyurl: "https://www.mongodb.org/static/pgp/server-4.0.asc"
     gpgkeyname: "server-4.0.asc"
     description: "MongoDB Repository"
-    download_path: "{{ tfplenumoffline_dir }}"
+    download_path: "{{ offline_dir }}"
   docker_ce:
     name: "docker-ce"
     baseurl: "https://download.docker.com/linux/centos/7/$basearch/stable"
     gpgkeyurl: "https://download.docker.com/linux/centos/gpg"
     gpgkeyname: "gpg"
     description: "Docker CE repo"
-    download_path: "{{ tfplenumoffline_dir }}"
+    download_path: "{{ offline_dir }}"
   ansible:
     name: "ansible"
     baseurl: "https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/"
     gpgkeyurl: "https://releases.ansible.com/keys/RPM-GPG-KEY-ansible-release.pub"
     gpgkeyname: "RPM-GPG-KEY-ansible-release.pub"
     description: "Ansible Repo"
-    download_path: "{{ tfplenumoffline_dir }}"
+    download_path: "{{ offline_dir }}"
     
 epel_repo:
     metalink: "https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch"
@@ -82,7 +82,7 @@ epel_repo:
     name: "epel"
     description: "epel repo"
     failovermethod: "priority"
-    download_path: "{{ tfplenumoffline_dir }}"
+    download_path: "{{ offline_dir }}"
 
 labrepo_gpg_keys:
   epel:
@@ -148,8 +148,8 @@ BOOTSTRAP: false
 ansible_controller_hostname: "controller.lan"
 
 RHEL_SOURCE_REPO: "{{ lookup('env','RHEL_SOURCE_REPO') | default('') }}"
-TFPLENUM_OS_TYPE: "{{ lookup('env','TFPLENUM_OS_TYPE') | default('') }}"
+OS_TYPE: "{{ lookup('env','OS_TYPE') | default('') }}"
 BOOTSTRAP_VARS: "{{ web_root }}/bootstrap.yml"
-TFPLENUM_REPO_DIR: "{{ tfplenumoffline_dir }}/tfplenum"
+REPO_DIR: "{{ offline_dir }}/tfplenum"
 
 ...

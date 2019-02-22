@@ -17,7 +17,7 @@
 - name: offline repo file
   template:
     src: templates/offline-tfplenum.repo
-    dest: "{{ tfplenumoffline_dir }}/offline.repo"
+    dest: "{{ offline_dir }}/offline.repo"
 
 - name: Clean repo cache
   shell: yum clean all

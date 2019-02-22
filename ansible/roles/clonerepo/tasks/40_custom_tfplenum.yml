@@ -2,19 +2,19 @@
 
 - name: remove old tfplenum repo
   file:
-    path: "{{ tfplenumoffline_dir }}/tfplenum"
+    path: "{{ offline_dir }}/tfplenum"
     state: absent
 
 - name: "Mirror custom tfplenum repo"
-  shell: "reposync --repoid=tfplenum --download_path={{ tfplenumoffline_dir }} --download-metadata --downloadcomps"
+  shell: "reposync --repoid=tfplenum --download_path={{ offline_dir }} --download-metadata --downloadcomps"
 
 - name: Remove Repodata
   file:
-    path: "{{ tfplenumoffline_dir }}/tfplenum/repodata"
+    path: "{{ offline_dir }}/tfplenum/repodata"
     state: absent
 
 - name: create repodata
-  shell: "createrepo {{ tfplenumoffline_dir }}/tfplenum"
+  shell: "createrepo {{ offline_dir }}/tfplenum"
 
 - name: get list of directories with wrong permissions
   shell: |
