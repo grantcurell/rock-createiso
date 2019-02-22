@@ -1,3 +1,5 @@
+---
+
 - name: Remove Repodata from {{ repo }}
   file:
     path: "{{ offline_dir }}/{{ repo }}/repodata"
@@ -18,3 +20,5 @@
 
 - name: "Create {{ repo }} repo"
   shell: "{{ createrepo_cmd }}"
+
+...

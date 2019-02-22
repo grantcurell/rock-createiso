@@ -9,3 +9,5 @@
     archive:
       path: "/tmp/node_modules"
       dest: "{{ offline_dir }}/elasticdump.tar.gz"
+
+...

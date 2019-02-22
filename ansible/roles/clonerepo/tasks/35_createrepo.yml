@@ -1,4 +1,5 @@
 ---
+
 # These tasks recreate the repo data for each repo based off the inventory file
 
 # The follow builds a list of the repos and sets it to the variable "repo"
@@ -59,3 +60,4 @@
   shell: |
     restorecon -Rv {{ web_root }}
     
+...

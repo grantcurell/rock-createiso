@@ -1,4 +1,5 @@
 ---
+
 - name: "Create directory for offline repos"
   file:
     path: "{{ offline_dir }}"
@@ -26,3 +27,5 @@
     name: "firewalld"
     state: started
     enabled: true
+
+...
