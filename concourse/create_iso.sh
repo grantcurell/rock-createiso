@@ -31,7 +31,7 @@ set -x
 cd "$(dirname "$(realpath "$0")")"
 
 # Install dependencies
-. ../bootstrap.sh
+. ../bootstrap-rock.sh
 
 # Create ISO
 echo "passing the following variables to master-iso.sh"

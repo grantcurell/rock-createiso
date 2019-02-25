@@ -4,7 +4,7 @@
 
 - set_fact:
     BOOTSTRAP: "{{ lookup('env','BOOTSTRAP') }}"
-    GIT_USERNAME: "{{ lookup('env','GIT_USERNAME') }}"
+    GITUSERNAME: "{{ lookup('env','GITUSERNAME') }}"
     GIT_PASSWORD: "{{ lookup('env','GIT_PASSWORD') }}"    
 
 - import_tasks: rhel_repos.yml

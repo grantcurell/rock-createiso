@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     sudo yum clean all
     sudo yum makecache fast
-    sudo /vagrant/bootstrap.sh
+    sudo /vagrant/rock-bootstrap.sh
     sudo usermod -a -G mock vagrant
   SHELL
 end
