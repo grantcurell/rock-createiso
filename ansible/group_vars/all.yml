@@ -14,7 +14,7 @@ kick_cfg: ks.cfg
 tftp_dir: /var/lib/tftpboot
 web_root: /var/www/html
 offline_dir: "{{ web_root }}/offlinerepo"
-install_dir: /opt/tfplenum
+install_dir: /opt/rock
 group_vars_location: "{{ install_dir }}/playbooks/group_vars/all/versions.yml"
 
 rhel_repos:

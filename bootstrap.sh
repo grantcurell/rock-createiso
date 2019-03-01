@@ -15,7 +15,7 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-REPOS=("tfplenum-frontend" "tfplenum" "tfplenum-deployer" "tfplenum-integration-testing")
+REPOS=("rock-frontend" "rock" "rock-deployer")
 
 function run_cmd {
     local command="$@"
@@ -286,14 +286,14 @@ EOF
 }
 
 function get_controller_ip() {
-    if [ -z "$TFPLENUM_SERVER_IP" ]; then
+    if [ -z "$SERVER_IP" ]; then
         controller_ips=`ip -o addr | awk '!/^[0-9]*: ?lo|inet6|docker|link\/ether/ {gsub("/", " "); print $4}'`
         choices=( $controller_ips )
         echo "-------"
         echo "Select the controllers ip address:"
         select cr in "${choices[@]}"; do
             case $cr in
-                $cr ) export TFPLENUM_SERVER_IP=$cr; break;;
+                $cr ) export SERVER_IP=$cr; break;;
             esac
         done
     fi
@@ -302,9 +302,9 @@ function get_controller_ip() {
 function prompt_git_creds() {
     if [ -z "$GITUSERNAME" ]; then
         echo "-------"
-        echo "Bootstrapping a controller requires DI2E credentials."
+        echo "Bootstrapping a controller requires git credentials."
         while true; do
-            read -p "DI2E Username: "  GITUSERNAME
+            read -p "git Username: "  GITUSERNAME
             if [ "$GITUSERNAME" == "" ]; then
                 echo "The username cannot be empty.  Please try again."            
             elif [ "$GITUSERNAME" != "" ]; then
@@ -351,13 +351,13 @@ function set_git_variables() {
             echo "Please type the name of the branch on the repo exactly. Make sure that you use the
             right branch name with each of your repos"
 
-            read -p "tfplenum Branch Name: " TFPLENUM_BRANCH_NAME
-            export TFPLENUM_BRANCH_NAME=$TFPLENUM_BRANCH_NAME
+            read -p "Primary Repo Branch Name: " PRIMARY_BRANCH_NAME
+            export PRIMARY_BRANCH_NAME=$PRIMARY_BRANCH_NAME
 
-            read -p "tfplenum-deployer Branch Name: " DEPLOYER_BRANCH_NAME
+            read -p "Deployer Branch Name: " DEPLOYER_BRANCH_NAME
             export DEPLOYER_BRANCH_NAME=$DEPLOYER_BRANCH_NAME
 
-            read -p "tfplenum-frontend Branch Name: " FRONTEND_BRANCH_NAME
+            read -p "Frontend Branch Name: " FRONTEND_BRANCH_NAME
             export FRONTEND_BRANCH_NAME=$FRONTEND_BRANCH_NAME
         fi
     fi
@@ -370,22 +370,22 @@ function clone_repos(){
             rm -rf $directory
         fi
         if [[ ! -d "$directory" && ("$USE_FORK" == "no") ]]; then
-            git clone https://bitbucket.di2e.net/scm/thisiscvah/$i.git
+            git clone https://github.com/foozyfoozand/$i.git
             pushd $directory > /dev/null
             git checkout $BRANCH_NAME
             popd > /dev/null
         fi
         if [[ ! -d "$directory" && ("$USE_FORK" == "yes") ]]; then
-            git clone https://bitbucket.di2e.net/scm/thisiscvah/$i.git
+            git clone https://github.com/foozyfoozand/$i.git
             pushd $directory > /dev/null
             case "$i" in
-            "tfplenum" )
-                test_branch_name "$TFPLENUM_BRANCH_NAME" "$i" ;;
-            "tfplenum-deployer" )
+            "primary" )
+                test_branch_name "$PRIMARY_BRANCH_NAME" "$i" ;;
+            "deployer" )
                 test_branch_name "$DEPLOYER_BRANCH_NAME" "$i" ;;
-            "tfplenum-integration-testing" )
+            "integration-testing" )
                 git checkout origin/devel ;;
-            "tfplenum-frontend" )
+            "frontend" )
                 test_branch_name "$FRONTEND_BRANCH_NAME" "$i" ;;
             esac
             popd > /dev/null

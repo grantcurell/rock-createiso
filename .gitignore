@@ -5,3 +5,5 @@ rocknsm_cache
 .vagrant
 product.img
 .DS_Store
+
+\.vscode/ftp-sync\.json

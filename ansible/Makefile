@@ -37,9 +37,9 @@ pull-docker-images:
 
 bootstrap:		
 	@echo $(OS_TYPE)	
-	@echo $(TFPLENUM_SERVER_IP)
+	@echo $(SERVER_IP)
 	@echo $(RHEL_SOURCE_REPO)
 
 	$(if $(filter $(OS_TYPE),Centos),\
-	ansible-playbook $(PLAYBOOK) -i localhost -e '{ RHEL_SOURCE_REPO: "None" }' -e '{ server_ip: "$(TFPLENUM_SERVER_IP)" }' -t bootstrap,\
-	ansible-playbook $(PLAYBOOK) -i localhost -e '{ RHEL_SOURCE_REPO: "$(RHEL_SOURCE_REPO)" }' -e '{ server_ip: "$(TFPLENUM_SERVER_IP)" }' -t bootstrap)
+	ansible-playbook $(PLAYBOOK) -i localhost -e '{ RHEL_SOURCE_REPO: "None" }' -e '{ server_ip: "$(SERVER_IP)" }' -t bootstrap,\
+	ansible-playbook $(PLAYBOOK) -i localhost -e '{ RHEL_SOURCE_REPO: "$(RHEL_SOURCE_REPO)" }' -e '{ server_ip: "$(SERVER_IP)" }' -t bootstrap)
