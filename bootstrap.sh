@@ -14,10 +14,14 @@ if grep "Red Hat Enterprise Linux Server" /etc/system-release; then
   fi
 
   yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+elif grep "Fedora" /etc/system-release; then
+  echo "You're running Fedora. Installing EPEL isn't necessary."
+
 else
   yum -y install epel-release
 fi
 
-yum -y install python-pip python-jinja2 python-simplejson genisoimage pykickstart createrepo rsync isomd5sum syslinux pigz mock fuseiso libguestfs-tools-c initial-setup-gui firstboot tree grub2-efi-modules ansible rpm-sign
+yum -y install python-pip python-jinja2 python-simplejson genisoimage pykickstart createrepo rsync isomd5sum syslinux pigz mock libguestfs-tools-c initial-setup-gui tree grub2-efi-modules ansible rpm-sign
 
-pip install pythonpy
+pip install pythonpy selinux

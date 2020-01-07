@@ -274,7 +274,12 @@ EOF
 
   # Setup UEFI branding
   mkdir ${TMP_NEW}/EFI/BOOT/x86_64-efi
-  cp /usr/lib/grub/x86_64-efi/gfxterm_background.mod ${TMP_NEW}/EFI/BOOT/x86_64-efi/
+
+  if grep "Fedora" /etc/system-release; then
+    cp /usr/lib/grub/arm64-efi/gfxterm_background.mod ${TMP_NEW}/EFI/BOOT/x86_64-efi/
+  else
+    cp /usr/lib/grub/x86_64-efi/gfxterm_background.mod ${TMP_NEW}/EFI/BOOT/x86_64-efi/
+  fi
 
   # Generate product image
   cd ${SCRIPT_DIR}/product
